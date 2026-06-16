@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Spiky Hair Salon — Book Online</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#14110e; --ink-soft:#2a241e; --bone:#f4efe7; --bone-2:#e9e2d6;
+    --blade:#b9bfc4; --blade-dk:#7e858b; --flare:#ff4719; --flare-dk:#d8350c;
+    --line:rgba(20,17,14,.12); --ok:#1f7a4d; --shadow:0 18px 50px -24px rgba(20,17,14,.55);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:"Inter",system-ui,sans-serif;background:var(--bone);color:var(--ink);line-height:1.55;-webkit-font-smoothing:antialiased}
+  h1,h2,h3,.display{font-family:"Anton",Impact,sans-serif;font-weight:400;letter-spacing:.01em;text-transform:uppercase;line-height:.92}
+  a{color:inherit}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+
+  .spikes{display:block;width:100%;height:22px}
+  .spikes path{fill:var(--flare)}
+
+  .hero{position:relative;background:var(--ink);color:var(--bone);overflow:hidden;padding:26px 0 0}
+  .nav{display:flex;align-items:center;justify-content:space-between;padding:8px 0 0}
+  .brand{display:flex;align-items:center;gap:12px;font-family:"Anton";font-size:20px;letter-spacing:.04em;text-transform:uppercase}
+  .mark{width:30px;height:30px;flex:0 0 auto}
+  .mark path{fill:var(--flare)}
+  .nav-info{font-size:13px;color:var(--blade);letter-spacing:.02em}
+  .nav-info b{color:var(--bone);font-weight:600}
+
+  .hero-grid{display:grid;grid-template-columns:1.35fr .9fr;gap:40px;align-items:end;padding:48px 0 64px}
+  .eyebrow{display:inline-block;font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:var(--flare);font-weight:700;margin-bottom:18px}
+  .hero h1{font-size:clamp(58px,11vw,128px);color:var(--bone)}
+  .hero h1 .o{color:var(--flare)}
+  .hero p.lede{margin-top:20px;max-width:34ch;color:var(--blade);font-size:17px}
+  .cta-row{margin-top:30px;display:flex;gap:14px;flex-wrap:wrap}
+  .btn{display:inline-flex;align-items:center;gap:10px;font-family:"Anton";text-transform:uppercase;letter-spacing:.04em;font-size:16px;padding:15px 26px;border:none;cursor:pointer;background:var(--flare);color:#fff;text-decoration:none;transition:transform .14s ease,background .14s ease;clip-path:polygon(0 0,100% 0,calc(100% - 12px) 100%,0 100%)}
+  .btn:hover{background:var(--flare-dk);transform:translateY(-2px)}
+  .btn.ghost{background:transparent;color:var(--bone);border:1.5px solid rgba(255,255,255,.28);clip-path:none}
+  .btn.ghost:hover{border-color:var(--flare);color:var(--flare);background:transparent}
+
+  .hero-card{background:linear-gradient(160deg,#211b15,#14110e);border:1px solid rgba(255,255,255,.08);padding:24px;position:relative}
+  .hero-card h3{font-size:15px;color:var(--flare);letter-spacing:.12em;margin-bottom:14px}
+  .hours-row{display:flex;justify-content:space-between;font-size:14px;padding:7px 0;border-bottom:1px dashed rgba(255,255,255,.1);color:var(--bone)}
+  .hours-row:last-child{border:none}
+  .hours-row span:last-child{color:var(--blade)}
+  .hours-row.closed span:last-child{color:var(--blade-dk)}
+
+  .section{padding:70px 0}
+  .sec-head{display:flex;align-items:baseline;justify-content:space-between;gap:20px;margin-bottom:36px;flex-wrap:wrap}
+  .sec-head h2{font-size:clamp(34px,6vw,56px)}
+  .sec-head .num{font-family:"Anton";color:var(--blade);font-size:14px;letter-spacing:.2em}
+  .sec-head p{color:var(--ink-soft);max-width:40ch;font-size:15px}
+
+  .svc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:2px;background:var(--line)}
+  .svc{background:var(--bone);padding:24px 22px;display:flex;flex-direction:column;gap:6px;transition:background .15s ease;cursor:pointer;position:relative}
+  .svc:hover{background:var(--bone-2)}
+  .svc .top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+  .svc h3{font-size:20px}
+  .svc .price{font-family:"Anton";font-size:22px;color:var(--flare);white-space:nowrap}
+  .svc .meta{font-size:13px;color:var(--blade-dk);letter-spacing:.02em}
+  .svc .desc{font-size:13.5px;color:var(--ink-soft);margin-top:4px}
+  .svc .pick{margin-top:12px;font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--flare);opacity:0;transition:opacity .15s}
+  .svc:hover .pick{opacity:1}
+
+  .booking{background:var(--ink);color:var(--bone)}
+  .booking .sec-head h2{color:var(--bone)}
+  .booking .sec-head p{color:var(--blade)}
+  .booking .sec-head .num{color:var(--blade-dk)}
+  .book-grid{display:grid;grid-template-columns:1fr 1fr;gap:36px}
+  @media(max-width:760px){.book-grid{grid-template-columns:1fr}}
+
+  .field{margin-bottom:20px}
+  .field label{display:block;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--blade);margin-bottom:8px;font-weight:600}
+  .field input,.field select{width:100%;background:#1f1913;border:1px solid rgba(255,255,255,.14);color:var(--bone);padding:13px 14px;font-family:inherit;font-size:15px;outline:none;transition:border-color .14s}
+  .field input:focus,.field select:focus{border-color:var(--flare)}
+  .field input::placeholder{color:#6d655b}
+  select option{color:#111}
+
+  .slots{display:grid;grid-template-columns:repeat(auto-fill,minmax(78px,1fr));gap:8px;margin-top:4px;min-height:46px}
+  .slot{background:#1f1913;border:1px solid rgba(255,255,255,.14);color:var(--bone);padding:11px 4px;text-align:center;font-size:14px;cursor:pointer;font-weight:500;transition:all .12s}
+  .slot:hover{border-color:var(--flare)}
+  .slot.active{background:var(--flare);border-color:var(--flare);color:#fff;font-weight:700}
+  .slot.disabled{opacity:.32;cursor:not-allowed;text-decoration:line-through}
+  .slot-empty{font-size:13px;color:var(--blade-dk);padding:10px 0}
+
+  .summary{background:linear-gradient(160deg,#211b15,#16120d);border:1px solid rgba(255,255,255,.1);padding:26px;position:sticky;top:20px}
+  .summary h3{font-size:16px;color:var(--flare);letter-spacing:.1em;margin-bottom:18px}
+  .sum-line{display:flex;justify-content:space-between;gap:12px;font-size:14.5px;padding:10px 0;border-bottom:1px dashed rgba(255,255,255,.12)}
+  .sum-line .k{color:var(--blade)}
+  .sum-line .v{color:var(--bone);font-weight:600;text-align:right}
+  .sum-total{display:flex;justify-content:space-between;align-items:baseline;padding-top:16px;margin-top:6px}
+  .sum-total .k{font-family:"Anton";text-transform:uppercase;letter-spacing:.06em;font-size:16px}
+  .sum-total .v{font-family:"Anton";font-size:30px;color:var(--flare)}
+  .confirm-btn{width:100%;justify-content:center;margin-top:20px;font-size:17px;clip-path:none}
+  .confirm-btn:disabled{background:#3a322a;color:#6d655b;cursor:not-allowed;transform:none}
+  .hint{font-size:12px;color:var(--blade-dk);margin-top:12px;text-align:center;line-height:1.5}
+  .bookmsg{display:none;font-size:13px;margin-top:14px;padding:11px 13px;border:1px solid var(--flare);color:#ffd9cd;background:rgba(255,71,25,.12)}
+  .bookmsg.show{display:block}
+
+  .done{display:none;text-align:center;padding:8px 4px}
+  .done.show{display:block;animation:pop .3s ease}
+  @keyframes pop{from{opacity:0;transform:scale(.96)}to{opacity:1;transform:scale(1)}}
+  .done .check{width:62px;height:62px;margin:0 auto 16px;border-radius:50%;background:var(--ok);display:flex;align-items:center;justify-content:center;font-size:32px;color:#fff}
+  .done h3{font-size:24px;color:var(--bone);margin-bottom:10px}
+  .done p{color:var(--blade);font-size:14.5px;margin-bottom:6px}
+  .cal-actions{display:flex;flex-direction:column;gap:10px;margin-top:22px}
+  .cal-actions .btn{justify-content:center;clip-path:none}
+  .restart{background:none;border:none;color:var(--blade);font-size:13px;text-decoration:underline;cursor:pointer;margin-top:16px}
+
+  footer{background:var(--bone-2);padding:48px 0;font-size:14px}
+  .foot-grid{display:flex;justify-content:space-between;gap:30px;flex-wrap:wrap;align-items:flex-start}
+  .foot-grid h4{font-family:"Anton";text-transform:uppercase;font-size:13px;letter-spacing:.12em;color:var(--blade-dk);margin-bottom:10px}
+  .foot-brand{font-family:"Anton";font-size:26px;text-transform:uppercase}
+  .foot-brand .o{color:var(--flare)}
+  .foot-grid a{color:var(--ink-soft);text-decoration:none;display:block;padding:2px 0}
+  .foot-grid a:hover{color:var(--flare)}
+  .foot-note{margin-top:34px;padding-top:18px;border-top:1px solid var(--line);font-size:12px;color:var(--blade-dk)}
+
+  @media(max-width:760px){.hero-grid{grid-template-columns:1fr;gap:28px;padding:30px 0 48px}.nav-info{display:none}.summary{position:static}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <nav class="nav">
+      <div class="brand">
+        <svg class="mark" viewBox="0 0 32 32" aria-hidden="true"><path d="M2 30 L7 6 L11 22 L16 4 L21 24 L25 9 L30 30 Z"/></svg>
+        SPIKY
+      </div>
+      <div class="nav-info"><b>548 Portrush Rd</b>, Glen Osmond SA · <b>Tue–Sat</b></div>
+    </nav>
+    <div class="hero-grid">
+      <div>
+        <span class="eyebrow">Glen Osmond · Adelaide</span>
+        <h1>SPIKY<br>HAIR<br>SAL<span class="o">O</span>N</h1>
+        <p class="lede">Sharp cuts, no fuss. One chair, one barber, your time only. Pick a service, grab a slot, done — no account needed.</p>
+        <div class="cta-row">
+          <a href="#book" class="btn">Book a chair ✂</a>
+          <a href="#services" class="btn ghost">See services</a>
+        </div>
+      </div>
+      <aside class="hero-card">
+        <h3>OPENING HOURS</h3>
+        <div class="hours-row"><span>Monday</span><span>Closed</span></div>
+        <div class="hours-row"><span>Tuesday</span><span>9:00 – 17:30</span></div>
+        <div class="hours-row"><span>Wednesday</span><span>9:00 – 17:30</span></div>
+        <div class="hours-row"><span>Thursday</span><span>9:00 – 19:00</span></div>
+        <div class="hours-row"><span>Friday</span><span>9:00 – 17:30</span></div>
+        <div class="hours-row"><span>Saturday</span><span>8:30 – 15:00</span></div>
+        <div class="hours-row closed"><span>Sunday</span><span>Closed</span></div>
+      </aside>
+    </div>
+  </div>
+  <svg class="spikes" viewBox="0 0 1200 22" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M0 22 L0 22 L60 0 L120 22 L180 0 L240 22 L300 0 L360 22 L420 0 L480 22 L540 0 L600 22 L660 0 L720 22 L780 0 L840 22 L900 0 L960 22 L1020 0 L1080 22 L1140 0 L1200 22 Z"/>
+  </svg>
+</header>
+
+<section class="section" id="services">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><div class="num">01 — THE MENU</div><h2>Services &amp; prices</h2></div>
+      <p>Every cut includes a wash and finish. Tap a service to load it into the booking below.</p>
+    </div>
+    <div class="svc-grid" id="svcGrid"></div>
+  </div>
+</section>
+
+<section class="section booking" id="book">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><div class="num">02 — BOOK IN</div><h2>Grab your slot</h2></div>
+      <p>No account, no app, no deposit. Fill it in and you're booked.</p>
+    </div>
+    <div class="book-grid">
+      <div id="formCol">
+        <div class="field"><label for="svcSelect">Service</label><select id="svcSelect"></select></div>
+        <div class="field"><label for="dateInput">Date</label><input type="date" id="dateInput"></div>
+        <div class="field"><label>Time</label><div class="slots" id="slots"><div class="slot-empty">Pick a date to see available times.</div></div></div>
+        <div class="field"><label for="nameInput">Your name</label><input type="text" id="nameInput" placeholder="First and last name"></div>
+        <div class="field"><label for="phoneInput">Mobile</label><input type="tel" id="phoneInput" placeholder="04XX XXX XXX"></div>
+        <div class="field"><label for="emailInput">Email (for your calendar invite)</label><input type="email" id="emailInput" placeholder="you@example.com"></div>
+      </div>
+      <div>
+        <div class="summary" id="summaryCard">
+          <h3>YOUR BOOKING</h3>
+          <div class="sum-line"><span class="k">Service</span><span class="v" id="sumSvc">—</span></div>
+          <div class="sum-line"><span class="k">With</span><span class="v">Adam Ma</span></div>
+          <div class="sum-line"><span class="k">When</span><span class="v" id="sumWhen">—</span></div>
+          <div class="sum-line"><span class="k">Duration</span><span class="v" id="sumDur">—</span></div>
+          <div class="sum-total"><span class="k">Total</span><span class="v" id="sumTotal">$0</span></div>
+          <button class="btn confirm-btn" id="confirmBtn" disabled>Confirm booking</button>
+          <div class="bookmsg" id="bookMsg"></div>
+          <p class="hint" id="bookHint">Booking confirmed instantly. You'll get a calendar invite by email.</p>
+        </div>
+        <div class="summary done" id="doneCard">
+          <div class="check">✓</div>
+          <h3>You're booked!</h3>
+          <p id="doneLine1">—</p>
+          <p id="doneLine2">548 Portrush Rd, Glen Osmond SA 5064</p>
+          <p class="hint" id="doneHint"></p>
+          <div class="cal-actions">
+            <a class="btn" id="googleBtn" target="_blank" rel="noopener">Add to Google Calendar</a>
+            <a class="btn ghost" id="icsBtn">Download .ics file</a>
+          </div>
+          <button class="restart" id="restartBtn">Make another booking</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot-grid">
+    <div>
+      <div class="foot-brand">SPIKY HAIR SAL<span class="o">O</span>N</div>
+      <p style="color:var(--ink-soft);margin-top:8px;max-width:32ch">One chair. One barber. Sharp every time.</p>
+    </div>
+    <div><h4>Find us</h4><a href="https://maps.google.com/?q=548+Portrush+Rd+Glen+Osmond+SA+5064" target="_blank" rel="noopener">548 Portrush Rd<br>Glen Osmond SA 5064</a></div>
+    <div><h4>Hours</h4><a>Tue–Fri · 9:00–17:30</a><a>Thu late · until 19:00</a><a>Sat · 8:30–15:00</a><a>Sun &amp; Mon · Closed</a></div>
+    <div><h4>Your barber</h4><a>Adam Ma</a></div>
+  </div>
+  <div class="wrap"><div class="foot-note">© <span id="yr"></span> Spiky Hair Salon · Glen Osmond, South Australia. Please arrive 5 minutes early.</div></div>
+</footer>
+
+<script>
+/* ============================================================
+   CONFIG — after you deploy the Apps Script Web app, paste its
+   URL between the quotes below. Until you do, the page runs in
+   "prototype mode" (calendar download only, no live bookings).
+   ============================================================ */
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyC2MuqyPx-R6mtGLh4VT2YyGNRMMhmGc143ympxfuT/dev";
+const LIVE = !/PASTE_YOUR/.test(SCRIPT_URL);
+
+const SALON = { name:"Spiky Hair Salon", barber:"Adam Ma", location:"548 Portrush Rd, Glen Osmond SA 5064" };
+const HOURS = { 0:null, 1:null, 2:[540,1050], 3:[540,1050], 4:[540,1140], 5:[540,1050], 6:[510,900] };
+const SLOT_STEP = 30;
+const SERVICES = [
+  {id:"mens",   name:"Men's Cut",        price:35, mins:30, desc:"Clipper or scissor cut, wash & finish."},
+  {id:"spiky",  name:"The Spiky",        price:45, mins:40, desc:"Textured style cut — our signature."},
+  {id:"buzz",   name:"Buzz Cut",         price:20, mins:15, desc:"One-grade all over, quick and clean."},
+  {id:"beard",  name:"Cut + Beard",      price:50, mins:45, desc:"Full cut plus beard trim & shape."},
+  {id:"trim",   name:"Beard Trim",       price:20, mins:20, desc:"Shape-up, line & hot towel."},
+  {id:"kids",   name:"Kids' Cut",        price:25, mins:20, desc:"Under 12s. Patient and friendly."},
+  {id:"wash",   name:"Wash, Cut & Style",price:65, mins:60, desc:"The full treatment, start to finish."},
+  {id:"colour", name:"Colour (consult)", price:120,mins:90, desc:"From $120 — includes a quick consult."}
+];
+
+let state = { svc:SERVICES[0], date:"", time:"", busy:[], loading:false };
+
+const $ = s => document.querySelector(s);
+const pad = n => String(n).padStart(2,"0");
+const money = n => "$"+n;
+const minsToLabel = m => { let h=Math.floor(m/60),mm=m%60,ap=h>=12?"pm":"am",h12=h%12||12; return h12+(mm?":"+pad(mm):"")+ap; };
+function fmtDur(mins){ if(mins<60) return mins+" min"; let h=Math.floor(mins/60),m=mins%60; return h+"h"+(m?" "+m+"m":""); }
+
+function renderServices(){
+  const grid = $("#svcGrid");
+  grid.innerHTML = SERVICES.map(s=>`
+    <div class="svc" data-id="${s.id}">
+      <div class="top"><h3>${s.name}</h3><span class="price">${money(s.price)}</span></div>
+      <div class="meta">${fmtDur(s.mins)} · with ${SALON.barber}</div>
+      <div class="desc">${s.desc}</div>
+      <div class="pick">Book this →</div>
+    </div>`).join("");
+  grid.querySelectorAll(".svc").forEach(el=>{
+    el.addEventListener("click",()=>{
+      const s = SERVICES.find(x=>x.id===el.dataset.id);
+      $("#svcSelect").value = s.id; state.svc = s; onServiceChange();
+      $("#book").scrollIntoView({behavior:"smooth"});
+    });
+  });
+}
+function fillSelect(){
+  $("#svcSelect").innerHTML = SERVICES.map(s=>`<option value="${s.id}">${s.name} — ${money(s.price)} · ${fmtDur(s.mins)}</option>`).join("");
+}
+function setupDate(){
+  const d = $("#dateInput"); const today = new Date();
+  d.min = today.toISOString().split("T")[0];
+  const max = new Date(); max.setDate(max.getDate()+60); d.max = max.toISOString().split("T")[0];
+}
+
+/* ===== live availability from backend ===== */
+async function loadAvailability(){
+  state.busy = [];
+  if(!state.date){ renderSlots(); return; }
+  if(!LIVE){ renderSlots(); return; }
+  state.loading = true; renderSlots();
+  try{
+    const res = await fetch(SCRIPT_URL + "?date=" + encodeURIComponent(state.date));
+    const data = await res.json();
+    if(data && data.ok && Array.isArray(data.busy)){
+      state.busy = data.busy.map(b=>{
+        const s=new Date(b.start), e=new Date(b.end);
+        return { s:s.getHours()*60+s.getMinutes(), e:e.getHours()*60+e.getMinutes() };
+      });
+    }
+  }catch(err){ /* network/not-deployed: fall back to showing all slots */ }
+  state.loading = false; renderSlots();
+}
+
+function renderSlots(){
+  const box = $("#slots");
+  if(!state.date){ box.innerHTML = `<div class="slot-empty">Pick a date to see available times.</div>`; return; }
+  if(state.loading){ box.innerHTML = `<div class="slot-empty">Checking what's free…</div>`; return; }
+  const [Y,M,D] = state.date.split("-").map(Number);
+  const dayObj = new Date(Y,M-1,D); const dow = dayObj.getDay(); const hrs = HOURS[dow];
+  if(!hrs){ box.innerHTML = `<div class="slot-empty">Closed on this day — try Tue–Sat.</div>`; state.time=""; updateSummary(); return; }
+
+  const dur = state.svc.mins; const [open, close] = hrs;
+  const now = new Date(); const isToday = dayObj.toDateString()===now.toDateString();
+  const nowMins = now.getHours()*60 + now.getMinutes();
+
+  let html="", count=0;
+  for(let t=open; t+dur<=close; t+=SLOT_STEP){
+    const past = isToday && t <= nowMins + 15;
+    const slotEnd = t + dur;
+    const taken = state.busy.some(b => t < b.e && slotEnd > b.s);
+    const off = past || taken;
+    const active = state.time===String(t);
+    html += `<div class="slot ${off?'disabled':''} ${active?'active':''}" data-t="${off?'':t}">${minsToLabel(t)}</div>`;
+    if(!off) count++;
+  }
+  if(count===0) html = `<div class="slot-empty">No times left for this day. Try another date.</div>`;
+  box.innerHTML = html;
+  box.querySelectorAll(".slot:not(.disabled)").forEach(el=>{
+    el.addEventListener("click",()=>{ state.time = el.dataset.t; renderSlots(); updateSummary(); });
+  });
+}
+
+function prettyDate(dStr){ const [Y,M,D]=dStr.split("-").map(Number); return new Date(Y,M-1,D).toLocaleDateString("en-AU",{weekday:"short",day:"numeric",month:"short"}); }
+function updateSummary(){
+  $("#sumSvc").textContent = state.svc.name+" ("+money(state.svc.price)+")";
+  $("#sumDur").textContent = fmtDur(state.svc.mins);
+  $("#sumTotal").textContent = money(state.svc.price);
+  $("#sumWhen").textContent = (state.date && state.time) ? prettyDate(state.date)+" · "+minsToLabel(Number(state.time)) : "—";
+  validate();
+}
+function validate(){
+  const ok = state.date && state.time && $("#nameInput").value.trim() && $("#phoneInput").value.trim() && /\S+@\S+\.\S+/.test($("#emailInput").value.trim());
+  $("#confirmBtn").disabled = !ok || state.loading;
+}
+function showMsg(text){ const m=$("#bookMsg"); m.textContent=text; m.classList.add("show"); }
+function clearMsg(){ $("#bookMsg").classList.remove("show"); }
+
+/* ===== calendar builders (customer's own copy) ===== */
+function eventTimes(){
+  const [Y,M,D]=state.date.split("-").map(Number); const startM=Number(state.time);
+  const sh=Math.floor(startM/60),sm=startM%60,endM=startM+state.svc.mins,eh=Math.floor(endM/60),em=endM%60;
+  return { start:`${Y}${pad(M)}${pad(D)}T${pad(sh)}${pad(sm)}00`, end:`${Y}${pad(M)}${pad(D)}T${pad(eh)}${pad(em)}00` };
+}
+function buildICS(){
+  const {start,end}=eventTimes(); const name=$("#nameInput").value.trim(); const phone=$("#phoneInput").value.trim();
+  const uid="spiky-"+Date.now()+"@spikyhairsalon"; const stamp=new Date().toISOString().replace(/[-:]/g,"").split(".")[0]+"Z";
+  const desc=`${state.svc.name} with ${SALON.barber}. Total ${money(state.svc.price)}. Booked for ${name} (${phone}).`;
+  return ["BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//Spiky Hair Salon//Booking//EN","CALSCALE:GREGORIAN","METHOD:PUBLISH","BEGIN:VEVENT","UID:"+uid,"DTSTAMP:"+stamp,"DTSTART:"+start,"DTEND:"+end,"SUMMARY:"+state.svc.name+" — Spiky Hair Salon","DESCRIPTION:"+desc,"LOCATION:"+SALON.location,"STATUS:CONFIRMED","END:VEVENT","END:VCALENDAR"].join("\r\n");
+}
+function googleLink(){
+  const {start,end}=eventTimes(); const name=$("#nameInput").value.trim(); const phone=$("#phoneInput").value.trim();
+  const text=encodeURIComponent(state.svc.name+" — Spiky Hair Salon");
+  const details=encodeURIComponent(`${state.svc.name} with ${SALON.barber}. Total ${money(state.svc.price)}. Booked for ${name} (${phone}).`);
+  return `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${text}&dates=${start}/${end}&details=${details}&location=${encodeURIComponent(SALON.location)}`;
+}
+
+/* ===== confirm flow ===== */
+async function confirmBooking(){
+  clearMsg();
+  if(!LIVE){ showConfirmed(true); return; }   // prototype mode
+
+  const btn=$("#confirmBtn"); btn.disabled=true; const label=btn.textContent; btn.textContent="Booking…";
+  const payload = {
+    service:state.svc.name, price:state.svc.price, durationMins:state.svc.mins,
+    date:state.date, startMins:Number(state.time),
+    name:$("#nameInput").value.trim(), phone:$("#phoneInput").value.trim(), email:$("#emailInput").value.trim()
+  };
+  try{
+    const res = await fetch(SCRIPT_URL, { method:"POST", body:JSON.stringify(payload) });
+    const data = await res.json();
+    if(data && data.ok){ showConfirmed(false); }
+    else if(data && data.error==="slot_taken"){ showMsg("Sorry — someone just grabbed that time. Pick another slot."); await loadAvailability(); }
+    else { showMsg("Couldn't complete the booking. Please try again or call the salon."); }
+  }catch(err){
+    showMsg("Network problem — booking not saved. Please try again.");
+  }finally{
+    btn.textContent=label; validate();
+  }
+}
+
+function showConfirmed(prototype){
+  const name=$("#nameInput").value.trim();
+  $("#doneLine1").textContent = `${state.svc.name} · ${prettyDate(state.date)} at ${minsToLabel(Number(state.time))} with ${SALON.barber}`;
+  $("#doneHint").textContent = prototype
+    ? "Preview mode — add it to your own calendar below."
+    : "Adam's been notified and your invite is on its way by email. You can also add it yourself below.";
+  $("#googleBtn").href = googleLink();
+  const blob = new Blob([buildICS()],{type:"text/calendar;charset=utf-8"});
+  const icsBtn = $("#icsBtn"); icsBtn.href = URL.createObjectURL(blob); icsBtn.download = "spiky-hair-booking.ics";
+  $("#summaryCard").style.display="none"; $("#doneCard").classList.add("show");
+}
+function resetBooking(){
+  $("#doneCard").classList.remove("show"); $("#summaryCard").style.display="block"; clearMsg();
+  ["nameInput","phoneInput","emailInput"].forEach(id=>$("#"+id).value="");
+  state.time=""; state.date=""; $("#dateInput").value=""; state.busy=[];
+  renderSlots(); updateSummary(); $("#book").scrollIntoView({behavior:"smooth"});
+}
+
+function onServiceChange(){ state.svc=SERVICES.find(s=>s.id===$("#svcSelect").value); state.time=""; renderSlots(); updateSummary(); }
+
+function init(){
+  $("#yr").textContent=new Date().getFullYear();
+  renderServices(); fillSelect(); setupDate(); updateSummary();
+  if(!LIVE){ $("#bookHint").textContent="Preview mode — add the booking to your own calendar after confirming."; }
+  $("#svcSelect").addEventListener("change", onServiceChange);
+  $("#dateInput").addEventListener("change", e=>{ state.date=e.target.value; state.time=""; clearMsg(); loadAvailability(); updateSummary(); });
+  ["nameInput","phoneInput","emailInput"].forEach(id=>$("#"+id).addEventListener("input", validate));
+  $("#confirmBtn").addEventListener("click", confirmBooking);
+  $("#restartBtn").addEventListener("click", resetBooking);
+}
+document.addEventListener("DOMContentLoaded", init);
+</script>
+</body>
+</html>
