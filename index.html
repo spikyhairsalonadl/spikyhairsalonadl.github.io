@@ -343,7 +343,7 @@ const LIVE = !/PASTE_YOUR/.test(SCRIPT_URL);
 const SALON = { name:"Spiky Hair Salon", barber:"Adam Ma", location:"548 Portrush Rd, Glen Osmond SA 5064" };
 const HOURS = { 0:null, 1:[600,1020], 2:null, 3:[600,810], 4:[600,1020], 5:[600,1020], 6:[600,960] };
 const SLOT_STEP = 15;
-const LUNCH = [720, 750]; // daily break, minutes from midnight: 12:00–12:30 (set to null for none)
+const LUNCH = [null]; // daily break, minutes from midnight: 12:00–12:30 (set to null for none)
 
 /* price: number sent to backend; priceText: optional display override */
 const SERVICES = [
