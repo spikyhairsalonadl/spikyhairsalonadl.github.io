@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Meet Adam — Spiky Hair Salon</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --white:#ffffff;--mist:#f4f8f2;--mint:#e8f1e6;--leaf:#5f8d5a;--leaf-dk:#456b42;
+    --moss:#3a5538;--ink:#2c352c;--muted:#6f7d6e;--line:#e1ebde;
+    --soft-shadow:0 14px 40px -22px rgba(58,85,56,.45);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:"Nunito Sans",system-ui,sans-serif;background:var(--white);color:var(--ink);line-height:1.65;-webkit-font-smoothing:antialiased}
+  h1,h2,h3,.serif{font-family:"Cormorant Garamond",Georgia,serif;font-weight:500;line-height:1.1}
+  a{color:inherit}
+  .wrap{max-width:1000px;margin:0 auto;padding:0 26px}
+
+  .topbar{background:linear-gradient(180deg,#ffffff,#f4f8f2);border-bottom:1px solid var(--line)}
+  .nav{display:flex;align-items:center;justify-content:space-between;padding:22px 0}
+  .brand{display:flex;align-items:center;gap:11px;font-weight:700;letter-spacing:.04em;font-size:15px;color:var(--moss);text-transform:uppercase;text-decoration:none}
+  .brand .leaf-mark{width:26px;height:26px}
+  .nav-links{display:flex;align-items:center;gap:24px}
+  .nav-links a{font-size:14.5px;color:var(--muted);text-decoration:none;font-weight:600}
+  .nav-links a:hover{color:var(--leaf-dk)}
+  .btn{display:inline-flex;align-items:center;gap:9px;font-weight:700;font-size:15px;padding:12px 24px;border:none;cursor:pointer;background:var(--leaf);color:#fff;text-decoration:none;border-radius:40px;transition:transform .15s,background .15s,box-shadow .15s;box-shadow:0 8px 22px -10px rgba(95,141,90,.7)}
+  .btn:hover{background:var(--leaf-dk);transform:translateY(-2px)}
+
+  .about{padding:80px 0 70px;position:relative;overflow:hidden}
+  .sprig{position:absolute;top:-30px;right:-30px;width:220px;opacity:.4;transform:rotate(14deg);pointer-events:none}
+  .about-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:48px;align-items:center;position:relative}
+  @media(max-width:760px){.about-grid{grid-template-columns:1fr;gap:32px}}
+
+  .portrait{position:relative;border-radius:20px;overflow:hidden;box-shadow:var(--soft-shadow);aspect-ratio:4/5;background:linear-gradient(160deg,#e8f1e6,#d2e4cf);display:flex;align-items:center;justify-content:center}
+  .portrait img{width:100%;height:100%;object-fit:cover;display:block}
+  .portrait .ph{position:absolute;font-family:"Cormorant Garamond",serif;font-size:90px;color:#a7c3a1}
+  .portrait .ph svg{width:70px;height:70px;color:#9cbd96}
+
+  .eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--leaf);font-weight:700;margin-bottom:16px}
+  .eyebrow svg{width:14px;height:14px}
+  .about h1{font-size:clamp(46px,7vw,76px);color:var(--moss)}
+  .about .role{font-size:17px;color:var(--leaf-dk);font-weight:600;margin-top:6px}
+  .about p{color:var(--ink);font-size:16.5px;margin-top:18px;max-width:52ch}
+  .about p.soft{color:var(--muted)}
+
+  .highlights{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+  .pill{display:flex;align-items:center;gap:8px;background:var(--mist);border:1px solid var(--line);border-radius:30px;padding:9px 16px;font-size:13.5px;font-weight:600;color:var(--leaf-dk)}
+  .pill svg{width:14px;height:14px;color:var(--leaf)}
+  .cta-row{margin-top:34px;display:flex;gap:14px;flex-wrap:wrap}
+
+  .closing{background:linear-gradient(180deg,#f4f8f2,#e8f1e6);text-align:center;padding:70px 0}
+  .closing h2{font-size:clamp(32px,5vw,48px);color:var(--moss)}
+  .closing p{color:var(--muted);font-size:16.5px;margin:14px 0 26px}
+
+  .divider{display:flex;align-items:center;justify-content:center;gap:16px;padding:8px 0}
+  .divider .ln{height:1px;width:80px;background:var(--line)}
+  .divider svg{width:26px;height:26px;color:var(--leaf);opacity:.8}
+
+  footer{background:var(--moss);color:#dfe9dc;padding:50px 0 36px}
+  .foot-grid{display:flex;justify-content:space-between;gap:34px;flex-wrap:wrap}
+  .foot-grid h4{font-weight:700;text-transform:uppercase;font-size:12px;letter-spacing:.14em;color:#a8c2a4;margin-bottom:12px}
+  .foot-brand{font-family:"Cormorant Garamond",serif;font-size:28px;color:#fff;display:flex;align-items:center;gap:12px}
+  .foot-brand .leaf-mark{width:26px;height:26px}
+  .foot-grid a,.foot-grid p{color:#cfe0cb;text-decoration:none;display:block;padding:2px 0;font-size:14.5px}
+  .foot-grid a:hover{color:#fff}
+  .foot-note{margin-top:36px;padding-top:20px;border-top:1px solid rgba(255,255,255,.14);font-size:12.5px;color:#9bb597}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+  <g id="sprig">
+    <path d="M60 200 C58 150 58 95 64 40 C66 26 70 14 76 4" fill="none" stroke="#5f8d5a" stroke-width="2.4"/>
+    <ellipse cx="40" cy="150" rx="26" ry="10" transform="rotate(28 40 150)" fill="#7fae79"/>
+    <ellipse cx="84" cy="124" rx="24" ry="9.5" transform="rotate(-26 84 124)" fill="#6a9b64"/>
+    <ellipse cx="42" cy="104" rx="24" ry="9" transform="rotate(32 42 104)" fill="#86b67f"/>
+    <ellipse cx="82" cy="80" rx="22" ry="8.5" transform="rotate(-30 82 80)" fill="#6a9b64"/>
+    <ellipse cx="50" cy="58" rx="20" ry="8" transform="rotate(34 50 58)" fill="#7fae79"/>
+    <ellipse cx="78" cy="38" rx="17" ry="7" transform="rotate(-32 78 38)" fill="#86b67f"/>
+    <ellipse cx="68" cy="16" rx="13" ry="6" transform="rotate(8 68 16)" fill="#7fae79"/>
+  </g>
+</defs></svg>
+
+<div class="topbar">
+  <div class="wrap">
+    <nav class="nav">
+      <a class="brand" href="index.html">
+        <svg class="leaf-mark" viewBox="0 0 24 24" fill="none"><path d="M12 2C7 7 7 15 12 22C17 15 17 7 12 2Z" fill="#5f8d5a"/><line x1="12" y1="5" x2="12" y2="20" stroke="#fff" stroke-width="1.4"/></svg>
+        Spiky Hair Salon
+      </a>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="index.html#services">Services</a>
+        <a class="btn" href="index.html#book">Book now</a>
+      </div>
+    </nav>
+  </div>
+</div>
+
+<section class="about">
+  <svg class="sprig" viewBox="0 0 120 210"><use href="#sprig"/></svg>
+  <div class="wrap about-grid">
+    <div class="portrait">
+      <!-- To add Adam's photo: upload it to your repo as adam.jpeg, alongside index.html -->
+      <img src="adam.jpeg" alt="Adam Ma, hairdresser at Spiky Hair Salon" onerror="this.style.display='none'">
+      <span class="ph"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="1.5"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span>
+    </div>
+    <div>
+      <span class="eyebrow">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M12 2C7 7 7 15 12 22C17 15 17 7 12 2Z" fill="#5f8d5a"/></svg>
+        Your hairdresser
+      </span>
+      <h1>Meet Adam</h1>
+      <div class="role">Hairdresser &amp; owner · Spiky Hair Salon</div>
+
+      <p>Adam Ma is the hairdresser behind Spiky Hair Salon — a single-chair studio tucked into Glen Osmond. One chair, one hairdresser, and one client at a time: every appointment is unhurried, private, and entirely about you. No crowded salon floor, no rushing off to the next person.</p>
+
+      <p>Whether it's a sharp men's cut, a fresh restyle, a colour or a perm, Adam takes the time to listen first and get the details right. His clients keep coming back for the calm, careful attention — and the relaxing wash that rounds off every visit.</p>
+
+      <p class="soft">The space reflects the way he likes to work: light, fresh and quiet — a spot to switch off for an hour and leave feeling like yourself again. Most days you'll find him here in Glen Osmond; on Tuesdays he works from home in Lightsview by request. He speaks English, Cantonese and Mandarin, so you're welcome in whichever feels most comfortable.</p>
+
+      <div class="highlights">
+        <span class="pill"><svg viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>One client at a time</span>
+        <span class="pill"><svg viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Cuts, colour, perms &amp; restyles</span>
+        <span class="pill"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.8 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8z"/></svg>4.9 from 12 happy clients</span>
+      </div>
+
+      <div class="cta-row">
+        <a class="btn" href="index.html#book">Book with Adam</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider">
+  <span class="ln"></span>
+  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C7 7 7 15 12 22C17 15 17 7 12 2Z"/></svg>
+  <span class="ln"></span>
+</div>
+
+<section class="closing">
+  <div class="wrap">
+    <h2>Ready for a fresh cut?</h2>
+    <p>Pick a time that suits you — no account, no fuss.</p>
+    <a class="btn" href="index.html#book">Book your visit</a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot-grid">
+    <div>
+      <div class="foot-brand">
+        <svg class="leaf-mark" viewBox="0 0 24 24" fill="none"><path d="M12 2C7 7 7 15 12 22C17 15 17 7 12 2Z" fill="#7fae79"/><line x1="12" y1="5" x2="12" y2="20" stroke="#3a5538" stroke-width="1.4"/></svg>
+        Spiky Hair Salon
+      </div>
+      <p style="margin-top:10px;max-width:32ch;color:#a8c2a4">A quiet, fresh place for a great haircut.</p>
+    </div>
+    <div><h4>Find us</h4><a href="https://maps.google.com/?q=548+Portrush+Rd+Glen+Osmond+SA+5064" target="_blank" rel="noopener">548 Portrush Rd<br>Glen Osmond SA 5064</a></div>
+    <div><h4>Hours</h4><p>Mon · 10:00–17:00</p><p>Wed · 10:00–13:30</p><p>Thu–Fri · 10:00–17:00</p><p>Sat · 10:00–16:00</p><p>Tue · by request</p></div>
+    <div><h4>Your hairdresser</h4><p>Adam Ma</p><p>★ 4.9 · 12 reviews</p></div>
+  </div>
+  <div class="wrap"><div class="foot-note">© <span id="yr"></span> Spiky Hair Salon · Glen Osmond, South Australia.</div></div>
+</footer>
+
+<script>document.getElementById("yr").textContent=new Date().getFullYear();</script>
+</body>
+</html>
